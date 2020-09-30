@@ -31,7 +31,12 @@ namespace asciiadventureYK
         private static void PrintScreen(Screen screen, string message, string menu)
         {
             //DisplayScreen();
-            Console.SetCursorPosition(screen.NumRows + 1, screen.NumCols + 1);
+            for (int x = 2; x < 10; x++)
+            {
+                Console.SetCursorPosition(screen.NumRows + x, screen.NumCols + x);
+                ClearCurrentConsoleLine();
+            }
+            Console.SetCursorPosition(screen.NumRows + 2, screen.NumCols + 2);
             Console.WriteLine($"\n{message}");
             Console.WriteLine($"\n{menu}");
         }
@@ -49,12 +54,13 @@ namespace asciiadventureYK
             {
                 new Wall(3 + i, 4, screen);
             }
+            Treasure treasure = new Treasure(6, 2, screen);
+
             Console.Write(screen.BuildWorld());
             // add a player
             Player player = new Player(0, 0, screen, "Zelda");
             UpdateObjectPosition(player.Row, player.Col, player.Token);
             // add a treasure
-            Treasure treasure = new Treasure(6, 2, screen);
 
             // add some mobs
             List<Mob> mobs = new List<Mob>();
@@ -67,7 +73,6 @@ namespace asciiadventureYK
 
             while (!gameOver)
             {
-
                 char input = Console.ReadKey(true).KeyChar;
                 UpdateObjectPosition(player.Row, player.Col, " ");
                 String message = "";
@@ -126,7 +131,7 @@ namespace asciiadventureYK
                     {
                         continue;
                     }
-                    // mobs move randomly
+                    // mobs move randomly 
                     var (deltaRow, deltaCol) = moves[random.Next(moves.Count)];
 
                     if (screen[mob.Row + deltaRow, mob.Col + deltaCol] is Player)
@@ -138,9 +143,10 @@ namespace asciiadventureYK
                         //Console.Write(mob.Token);
                         UpdateObjectPosition(mob.Row, mob.Col, mob.Token);
                         Console.Clear();
-                        PrintScreen(screen, gameoverscreen, Menu());
+                        PrintScreen(screen, gameoverscreen, "Press T to try again, or Q to exit.");
                         Thread.Sleep(3000);
                         gameOver = true;
+                        continue;
                     }
                     //Console.SetCursorPosition(mob.Col, mob.Row);
                     //Console.Write(" ");
@@ -154,8 +160,19 @@ namespace asciiadventureYK
                         UpdateObjectPosition(mob.Row, mob.Col, mob.Token);
                     }
                 }
-
-                PrintScreen(screen, "Player Position is: \n                  \n                  \n                                    \n " + player.Row + ", " + player.Col + "\n" + message, Menu());
+                PrintScreen(screen, "Player Position is: \n\n" + player.Row + ", " + player.Col + "\n" + message, Menu());
+            }
+            char inp = Console.ReadKey(true).KeyChar;
+            if (Eq(inp, 'q'))
+            {}
+            if (Eq(inp, 't'))
+            {
+                Console.Clear();
+                this.Run();
+            }
+            else
+            {
+                Console.WriteLine($"Unknown command: {inp}");
             }
         }
 
@@ -165,7 +182,13 @@ namespace asciiadventureYK
             Console.Write(input);
         }
 
-
+        public static void ClearCurrentConsoleLine()
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, currentLineCursor);
+        }
         public static void Main(string[] args)
         {
             Game game = new Game();
