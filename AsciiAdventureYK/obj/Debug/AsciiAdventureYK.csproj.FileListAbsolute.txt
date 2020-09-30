@@ -1,0 +1,7 @@
+C:\Users\kyama\source\repos\AsciiAdventureYK\AsciiAdventureYK\bin\Debug\AsciiAdventureYK.exe.config
+C:\Users\kyama\source\repos\AsciiAdventureYK\AsciiAdventureYK\bin\Debug\AsciiAdventureYK.exe
+C:\Users\kyama\source\repos\AsciiAdventureYK\AsciiAdventureYK\bin\Debug\AsciiAdventureYK.pdb
+C:\Users\kyama\source\repos\AsciiAdventureYK\AsciiAdventureYK\obj\Debug\AsciiAdventureYK.csprojAssemblyReference.cache
+C:\Users\kyama\source\repos\AsciiAdventureYK\AsciiAdventureYK\obj\Debug\AsciiAdventureYK.csproj.CoreCompileInputs.cache
+C:\Users\kyama\source\repos\AsciiAdventureYK\AsciiAdventureYK\obj\Debug\AsciiAdventureYK.exe
+C:\Users\kyama\source\repos\AsciiAdventureYK\AsciiAdventureYK\obj\Debug\AsciiAdventureYK.pdb
