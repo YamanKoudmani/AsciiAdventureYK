@@ -140,21 +140,24 @@ namespace asciiadventureYK
                     }
                     //Console.SetCursorPosition(mob.Col, mob.Row);
                     //Console.Write(" ");
-                    UpdateObjectPosition(mob.Row, mob.Col, mob.Token);
+                    if (!gameOver)
+                    {
+                        UpdateObjectPosition(mob.Row, mob.Col, " ");
 
-                    mob.Move(deltaCol, deltaRow);
-                    //Console.SetCursorPosition(mob.Col, mob.Row);
-                    //Console.Write(mob.Token);
-                    UpdateObjectPosition(mob.Row, mob.Col, mob.Token);
+                        mob.Move(deltaCol, deltaRow);
+                        //Console.SetCursorPosition(mob.Col, mob.Row);
+                        //Console.Write(mob.Token);
+                        UpdateObjectPosition(mob.Row, mob.Col, mob.Token);
+                    }
                 }
 
-                PrintScreen(screen, message, Menu());
+                PrintScreen(screen, "Player Position is: \n                  \n                  \n                                    \n " + player.Row + ", " + player.Col, Menu());
             }
         }
 
         public void UpdateObjectPosition(int r, int c, String input)
         {
-            Console.SetCursorPosition(r + 1, c + 1);
+            Console.SetCursorPosition(c + 1, r + 1);
             Console.Write(input);
         }
 

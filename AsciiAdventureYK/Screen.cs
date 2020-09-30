@@ -125,7 +125,7 @@ namespace asciiadventureYK
                 for (int c = 0; c < NumCols; c++)
                 {
                 GameObject gameObject = this[r, c];
-                    if (gameObject == null || gameObject.Token == "@" || gameObject.Token == "#")
+                    if (gameObject == null || gameObject is Player || gameObject is Mob || gameObject is Treasure)
                     {
                         result.Append(' ');
                     }
