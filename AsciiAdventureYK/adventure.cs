@@ -17,6 +17,8 @@ namespace asciiadventureYK
     public class Game
     {
         private Random random = new Random();
+        private string gameoverscreen = "╔═══╗            ╔╗               ╔╗                  ╔╗    \n║╔═╗║            ║║              ╔╝╚╗                 ║║    \n║║ ║║    ╔╗╔╗╔══╗║╚═╗    ╔══╗╔══╗╚╗╔╝    ╔╗ ╔╗╔══╗╔╗╔╗║║    \n║╚═╝║    ║╚╝║║╔╗║║╔╗║    ║╔╗║║╔╗║ ║║     ║║ ║║║╔╗║║║║║╚╝    \n║╔═╗║    ║║║║║╚╝║║╚╝║    ║╚╝║║╚╝║ ║╚╗    ║╚═╝║║╚╝║║╚╝║╔╗    \n╚╝ ╚╝    ╚╩╩╝╚══╝╚══╝    ╚═╗║╚══╝ ╚═╝    ╚═╗╔╝╚══╝╚══╝╚╝    \n                         ╔═╝║            ╔═╝║               \n                         ╚══╝            ╚══╝               \n╔═══╗╔═══╗╔═╗╔═╗╔═══╗    ╔═══╗╔╗  ╔╗╔═══╗╔═══╗\n║╔═╗║║╔═╗║║║╚╝║║║╔══╝    ║╔═╗║║╚╗╔╝║║╔══╝║╔═╗║\n║║ ╚╝║║ ║║║╔╗╔╗║║╚══╗    ║║ ║║╚╗║║╔╝║╚══╗║╚═╝║\n║║╔═╗║╚═╝║║║║║║║║╔══╝    ║║ ║║ ║╚╝║ ║╔══╝║╔╗╔╝\n║╚╩═║║╔═╗║║║║║║║║╚══╗    ║╚═╝║ ╚╗╔╝ ║╚══╗║║║╚╗\n╚═══╝╚╝ ╚╝╚╝╚╝╚╝╚═══╝    ╚═══╝  ╚╝  ╚═══╝╚╝╚═╝\n                                              \n                                              ";
+
         private static Boolean Eq(char c1, char c2)
         {
             return c1.ToString().Equals(c2.ToString(), StringComparison.OrdinalIgnoreCase);
@@ -135,6 +137,7 @@ namespace asciiadventureYK
                         //Console.SetCursorPosition(mob.Col +1, mob.Row+1);
                         //Console.Write(mob.Token);
                         UpdateObjectPosition(mob.Row, mob.Col, mob.Token);
+                        PrintScreen(screen, gameoverscreen, Menu());
                         Thread.Sleep(3000);
                         gameOver = true;
                     }
@@ -151,7 +154,7 @@ namespace asciiadventureYK
                     }
                 }
 
-                PrintScreen(screen, "Player Position is: \n                  \n                  \n                                    \n " + player.Row + ", " + player.Col, Menu());
+                PrintScreen(screen, "Player Position is: \n                  \n                  \n                                    \n " + player.Row + ", " + player.Col + "\n" + message, Menu());
             }
         }
 
