@@ -137,6 +137,7 @@ namespace asciiadventureYK
                         //Console.SetCursorPosition(mob.Col +1, mob.Row+1);
                         //Console.Write(mob.Token);
                         UpdateObjectPosition(mob.Row, mob.Col, mob.Token);
+                        Console.Clear();
                         PrintScreen(screen, gameoverscreen, Menu());
                         Thread.Sleep(3000);
                         gameOver = true;
