@@ -163,16 +163,23 @@ namespace asciiadventureYK
                 PrintScreen(screen, "Player Position is: \n\n" + player.Row + ", " + player.Col + "\n" + message, Menu());
             }
             char inp = Console.ReadKey(true).KeyChar;
-            if (Eq(inp, 'q'))
-            {}
-            if (Eq(inp, 't'))
+            while (!Eq(inp, 'q'))
             {
-                Console.Clear();
-                this.Run();
-            }
-            else
-            {
-                Console.WriteLine($"Unknown command: {inp}");
+                if (Eq(inp, 't'))
+                {
+                    Console.Clear();
+                    this.Run();
+                }
+                if (Eq(inp, 'q'))
+                {
+                }
+                else
+                {
+                    Console.WriteLine($"Unknown command: {inp}");
+                    Thread.Sleep(100);
+                    PrintScreen(screen, gameoverscreen, "Press T to try again, or Q to exit.");
+                    inp = Console.ReadKey(true).KeyChar;
+                }
             }
         }
 
