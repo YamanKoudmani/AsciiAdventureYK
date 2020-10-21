@@ -25,18 +25,18 @@ namespace asciiadventureYK
         }
         private static string Menu()
         {
-            return "WASD to move\nIJKL to attack/interact\n";
+            return "WASD to move\nIJKL to attack/interact\nCurrent cash: ";
         }
 
         private static void PrintScreen(Screen screen, string message, string menu)
         {
             //DisplayScreen();
-            for (int x = 2; x < 10; x++)
+            for (int x = 2; x < 15; x++)
             {
                 Console.SetCursorPosition(screen.NumRows + x, screen.NumCols + x);
                 ClearCurrentConsoleLine();
             }
-            Console.SetCursorPosition(screen.NumRows + 2, screen.NumCols + 2);
+            Console.SetCursorPosition(0, screen.NumCols + 2);
             Console.WriteLine($"\n{message}");
             Console.WriteLine($"\n{menu}");
         }
@@ -55,7 +55,7 @@ namespace asciiadventureYK
             }
             // add a treasure
             Treasure treasure = new Treasure(6, 2, screen);
-
+            Money mon = new Money(4, 1, screen, 10);
             // initially print the game board
             Console.Write(screen.BuildWorld());
             // add a player
@@ -63,7 +63,7 @@ namespace asciiadventureYK
             Console.ForegroundColor = ConsoleColor.Yellow;
             UpdateObjectPosition(CheckPosition(player), player.Token);
             //print welcome screen
-            PrintScreen(screen, "Welcome!", Menu());
+            PrintScreen(screen, "Welcome!", "\n" + Menu());
 
             // add some mobs
             List<Mob> mobs = new List<Mob>();
@@ -82,7 +82,7 @@ namespace asciiadventureYK
             while (!gameOver)
             {
                 char input = Console.ReadKey(true).KeyChar;
-                String message = "";
+                String message = "Current cash: " + player.Money + "\n";
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 UpdateObjectPosition(CheckPosition(player), " ");
 
@@ -95,7 +95,7 @@ namespace asciiadventureYK
                     {
                         continue;
                     }
-                    // mobs move randomly
+                    // mobs move less randomly
                     int deltaRow = 0;
                     int deltaCol = 0;
                     int randomy = new Random().Next(2);
@@ -149,15 +149,13 @@ namespace asciiadventureYK
                             }
                         }
                     }
-//                    var delta = Tuple.Create(deltaRow, deltaCol);
 
                     if (screen[mob.Row + deltaRow, mob.Col + deltaCol] is Player)
                     {
                         // the mob got the player!
                         mob.Token = "*";
                         message += "A MOB GOT YOU! GAME OVER\n";
-                        //Console.SetCursorPosition(mob.Col +1, mob.Row+1);
-                        //Console.Write(mob.Token);
+
                         UpdateObjectPosition(CheckPosition(mob), mob.Token);
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -172,8 +170,6 @@ namespace asciiadventureYK
                         UpdateObjectPosition(CheckPosition(mob), " ");
                         Console.ForegroundColor = ConsoleColor.Red;
                         mob.Move(deltaCol, deltaRow);
-                        //Console.SetCursorPosition(mob.Col, mob.Row);
-                        //Console.Write(mob.Token);
                         UpdateObjectPosition(CheckPosition(mob), mob.Token);
                     }
                 }
@@ -181,7 +177,7 @@ namespace asciiadventureYK
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 UpdateObjectPosition(CheckPosition(player), player.Token);
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                PrintScreen(screen, "Player Position is: " + player.Row + ", " + player.Col + "\nMob1 Position is: " + mobs[0].Row + ", " + mobs[0].Col + "\n" + message, Menu());
+                PrintScreen(screen, "Player Position is: " + player.Row + ", " + player.Col + "\nMob1 Position is: " + mobs[0].Row + ", " + mobs[0].Col + "\n" + message, Menu() + player.Money);
             }
             char inp = Console.ReadKey(true).KeyChar;
             while (!Eq(inp, 'q'))

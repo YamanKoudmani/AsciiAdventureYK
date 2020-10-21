@@ -13,6 +13,11 @@ namespace asciiadventureYK
             get;
             protected set;
         }
+        public int Money
+        {
+            get;
+            protected set;
+        }
         public override Boolean IsPassable()
         {
             return true;
@@ -35,9 +40,20 @@ namespace asciiadventureYK
             if (other is Treasure)
             {
                 other.Delete();
+                Console.SetCursorPosition(other.Col + 1, other.Row + 1);
+                Console.Write(" ");
                 return "Yay, we got the treasure!";
             }
-            return "ouch";
+            if (other is Money)
+            {
+                other.Delete();
+                Money m = (Money) other;
+                Money += m.CashBlock;
+                Console.SetCursorPosition(other.Col+1, other.Row+1);
+                Console.Write(" ");
+                return "Yay, we got " + m.CashBlock +" dollars!";
+            }
+            return "yikes";
         }
     }
 }

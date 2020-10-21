@@ -105,4 +105,17 @@ namespace asciiadventureYK
             return true;
         }
     }
+    class Money : GameObject
+    {
+        public int CashBlock
+        {
+            get;
+        }
+        public Money(int row, int col, Screen screen, int val) : base(row, col, "$", screen) { CashBlock = val; }
+        public override bool IsPassable()
+        {
+            return true;
+        }
+
+    }
 }
